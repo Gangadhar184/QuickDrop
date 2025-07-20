@@ -42,11 +42,12 @@ export const signIn = async (req:Request, res:Response) => {
             
 
             //cookies - add token to cookies and send 
-            res.cookie("token", token, {expires: new Date(Date.now() + 8 * 360000), httpOnly:true, secure: process.env.NODE_ENV === "production", sameSite: "strict"});
-            res.json({ 
-            message: "Login successful",
-           
-        });
+            // res.cookie("token", token, {expires: new Date(Date.now() + 8 * 360000), httpOnly:true, secure: process.env.NODE_ENV === "production", sameSite: "strict"});
+            
+
+            //setting token in header
+            res.setHeader("Authorization", `Bearer ${token}`);
+            res.status(200).json({ message: "Login successful" });
         }else{
             throw new Error("Invalid creds")
         }
