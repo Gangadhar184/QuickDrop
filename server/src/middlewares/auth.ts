@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User, { IUser } from "../models/User";
 import { Request, Response, NextFunction } from "express";
-import { success } from "zod";
+
 
 
 declare module 'express-serve-static-core' {
@@ -54,7 +54,7 @@ declare module 'express-serve-static-core' {
 export const userAuth = async(req:Request, res: Response, next: NextFunction) => {
   try{
     const authHeader = req.headers.authorization;
-    
+
     if(!authHeader || !authHeader.startsWith("Bearer ")){
       return res.status(401).json({
         success: false,

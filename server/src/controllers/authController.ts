@@ -57,14 +57,10 @@ export const signIn = async (req:Request, res:Response) => {
 
 }
 export const logOut = async (req:Request, res:Response) => {
-    try{
-        res.cookie("token", "", {
-            expires: new Date(Date.now())
-        });
-       res.json({ message: "Logout successful" });
-    }catch(error:any){
-        console.error("Logout error:", error);
-        res.status(500).json({ error: "Logout failed: " + error.message });
-
-    }
+    try {
+    // No token clearing on server side when using headers
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error: any) {
+    res.status(500).json({ error: "Logout failed: " + error.message });
+  }
 }
